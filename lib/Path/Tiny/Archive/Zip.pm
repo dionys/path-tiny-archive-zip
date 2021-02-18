@@ -10,7 +10,7 @@ use Archive::Zip qw( :ERROR_CODES );
 use Path::Tiny qw( path );
 
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
 
 BEGIN {
