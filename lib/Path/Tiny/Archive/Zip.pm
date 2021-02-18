@@ -22,6 +22,8 @@ BEGIN {
     path("/tmp/foo.txt")->zip("/tmp/foo.zip");
     path("/tmp/foo")->zip("/tmp/foo.zip");
 
+Creates a zip archive and appends a file or directory tree to it.
+
 =cut
 
 sub zip {
@@ -48,6 +50,8 @@ sub zip {
 =method unzip
 
     path("/tmp/foo.zip")->zip("/tmp/foo");
+
+Extracts a zip archive to specified directory.
 
 =cut
 

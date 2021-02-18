@@ -18,9 +18,13 @@ zip archives.
     path("/tmp/foo.txt")->zip("/tmp/foo.zip");
     path("/tmp/foo")->zip("/tmp/foo.zip");
 
+Creates a zip archive and appends a file or directory tree to it.
+
 ## unzip
 
     path("/tmp/foo.zip")->zip("/tmp/foo");
+
+Extracts a zip archive to specified directory.
 
 # AUTHOR
 
