@@ -17,12 +17,12 @@ BEGIN {
     push(@Path::Tiny::ISA, __PACKAGE__);
 }
 
-#pod =method zip
-#pod
-#pod     path("/tmp/foo.txt")->zip("/tmp/foo.zip");
-#pod     path("/tmp/foo")->zip("/tmp/foo.zip");
-#pod
-#pod =cut
+=method zip
+
+    path("/tmp/foo.txt")->zip("/tmp/foo.zip");
+    path("/tmp/foo")->zip("/tmp/foo.zip");
+
+=cut
 
 sub zip {
     my ($self, $dest) = @_;
@@ -45,11 +45,11 @@ sub zip {
     return $dest;
 }
 
-#pod =method unzip
-#pod
-#pod     path("/tmp/foo.zip")->zip("/tmp/foo");
-#pod
-#pod =cut
+=method unzip
+
+    path("/tmp/foo.zip")->zip("/tmp/foo");
+
+=cut
 
 sub unzip {
     my ($self, $dest) = @_;
