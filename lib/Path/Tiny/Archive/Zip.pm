@@ -37,6 +37,9 @@ sub zip {
     elsif ($self->is_dir) {
         $zip->addTree($self->realpath->stringify(), '');
     }
+    else {
+        return;
+    }
 
     $dest = path($dest);
 
@@ -66,11 +69,11 @@ sub unzip {
     }
 
     $dest = path($dest);
-    if ($dest->is_file) {
-        return;
+    if ($dest->exists) {
+        return unless $dest->is_dir;
     }
-    unless ($dest->is_dir) {
-        $dest->mkpath();
+    else {
+        $dest->mkpath() or return;
     }
 
     unless ($zip->extractTree(undef, $dest->realpath->stringify()) == AZ_OK) {
