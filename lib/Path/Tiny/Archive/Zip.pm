@@ -6,7 +6,6 @@ use strict;
 use warnings;
 
 use Archive::Zip qw( :ERROR_CODES );
-#use Carp qw( croak );
 use Path::Tiny qw( path );
 
 
@@ -22,7 +21,8 @@ BEGIN {
     path("/tmp/foo.txt")->zip("/tmp/foo.zip");
     path("/tmp/foo")->zip("/tmp/foo.zip");
 
-Creates a zip archive and appends a file or directory tree to it.
+Creates a zip archive and appends a file or directory tree to it. Returns the
+path to the zip archive or undef.
 
 =cut
 
@@ -49,9 +49,10 @@ sub zip {
 
 =method unzip
 
-    path("/tmp/foo.zip")->zip("/tmp/foo");
+    path("/tmp/foo.zip")->unzip("/tmp/foo");
 
-Extracts a zip archive to specified directory.
+Extracts a zip archive to specified directory. Returns the path to the
+destination directory or undef.
 
 =cut
 
