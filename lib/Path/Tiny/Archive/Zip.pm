@@ -13,7 +13,7 @@ use namespace::clean;
 use Exporter qw( import );
 
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 our %EXPORT_TAGS = ( const =>[qw(
     COMPRESSION_DEFAULT
