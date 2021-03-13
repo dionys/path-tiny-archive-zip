@@ -10,7 +10,7 @@ use Exporter qw( import );
 use Path::Tiny qw( path );
 
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 our %EXPORT_TAGS = ( const =>[qw(
     COMPRESSION_DEFAULT
@@ -71,10 +71,10 @@ sub zip {
     my $zip = Archive::Zip->new;
 
     if ($self->is_file) {
-        $zip->addFile($self->realpath->stringify(), $self->basename, defined $level ? $level : ());
+        $zip->addFile($self->stringify(), $self->basename, defined $level ? $level : ());
     }
     elsif ($self->is_dir) {
-        $zip->addTree($self->realpath->stringify(), '', undef, defined $level ? $level : ());
+        $zip->addTree($self->stringify(), '', undef, defined $level ? $level : ());
     }
     else {
         return;
@@ -82,7 +82,7 @@ sub zip {
 
     $dest = path($dest);
 
-    unless ($zip->writeToFileNamed($dest->realpath->stringify()) == Archive::Zip::AZ_OK) {
+    unless ($zip->writeToFileNamed($dest->stringify()) == Archive::Zip::AZ_OK) {
         return;
     }
 
@@ -103,7 +103,7 @@ sub unzip {
 
     my $zip = Archive::Zip->new();
 
-    unless ($zip->read($self->realpath->stringify()) == Archive::Zip::AZ_OK) {
+    unless ($zip->read($self->stringify()) == Archive::Zip::AZ_OK) {
         return;
     }
 
@@ -115,7 +115,7 @@ sub unzip {
         $dest->mkpath() or return;
     }
 
-    unless ($zip->extractTree(undef, $dest->realpath->stringify()) == Archive::Zip::AZ_OK) {
+    unless ($zip->extractTree(undef, $dest->stringify()) == Archive::Zip::AZ_OK) {
         return;
     }
 
