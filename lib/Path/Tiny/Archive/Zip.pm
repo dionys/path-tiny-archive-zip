@@ -5,12 +5,9 @@ package Path::Tiny::Archive::Zip;
 use strict;
 use warnings;
 
-use Archive::Zip qw( :ERROR_CODES :CONSTANTS );
-use Path::Tiny qw( path );
-
-use namespace::clean;
-
+use Archive::Zip ();
 use Exporter qw( import );
+use Path::Tiny qw( path );
 
 
 our $VERSION = '0.003';
@@ -29,12 +26,11 @@ BEGIN {
 }
 
 use constant {
-    COMPRESSION_DEFAULT => COMPRESSION_LEVEL_DEFAULT,           # 6
-    COMPRESSION_NONE    => COMPRESSION_LEVEL_NONE,              # 0
-    COMPRESSION_FASTEST => COMPRESSION_LEVEL_FASTEST,           # 1
-    COMPRESSION_BEST    => COMPRESSION_LEVEL_BEST_COMPRESSION,  # 9
+    COMPRESSION_DEFAULT => Archive::Zip::COMPRESSION_LEVEL_DEFAULT,           # 6
+    COMPRESSION_NONE    => Archive::Zip::COMPRESSION_LEVEL_NONE,              # 0
+    COMPRESSION_FASTEST => Archive::Zip::COMPRESSION_LEVEL_FASTEST,           # 1
+    COMPRESSION_BEST    => Archive::Zip::COMPRESSION_LEVEL_BEST_COMPRESSION,  # 9
 };
-
 
 =method zip
 
@@ -86,7 +82,7 @@ sub zip {
 
     $dest = path($dest);
 
-    unless ($zip->writeToFileNamed($dest->realpath->stringify()) == AZ_OK) {
+    unless ($zip->writeToFileNamed($dest->realpath->stringify()) == Archive::Zip::AZ_OK) {
         return;
     }
 
@@ -107,7 +103,7 @@ sub unzip {
 
     my $zip = Archive::Zip->new();
 
-    unless ($zip->read($self->realpath->stringify()) == AZ_OK) {
+    unless ($zip->read($self->realpath->stringify()) == Archive::Zip::AZ_OK) {
         return;
     }
 
@@ -119,7 +115,7 @@ sub unzip {
         $dest->mkpath() or return;
     }
 
-    unless ($zip->extractTree(undef, $dest->realpath->stringify()) == AZ_OK) {
+    unless ($zip->extractTree(undef, $dest->realpath->stringify()) == Archive::Zip::AZ_OK) {
         return;
     }
 
